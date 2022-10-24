@@ -77,9 +77,9 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
         <AiOutlineCloseCircle size={28} />
       </button>
       <main className={styles["container"]}>
-        {user && user.avatar_url && (
+        {userData && userData.avatar_url && (
           <Image
-            src={user.avatar_url}
+            src={userData.avatar_url}
             unoptimized
             width={150}
             height={150}
