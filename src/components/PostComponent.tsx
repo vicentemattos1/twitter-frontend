@@ -19,20 +19,8 @@ export function PostComponent({ post }: PostComponentProps) {
   function handleRepost(post: Post) {
     if (user) {
       const postsUpdated = [{ ...post, reposted_by: user }, ...posts];
-      const postsAndUsersUpdated = postsUpdated.map((postUpdated) => {
-        if (postUpdated.user.id === user.id) {
-          return {
-            ...postUpdated,
-            user: {
-              ...postUpdated.user,
-              number_posts: postUpdated.user.number_posts + 1,
-            },
-          };
-        }
-        return postUpdated;
-      });
-      setPosts(postsAndUsersUpdated);
-      setUser({ ...user, number_posts: user.number_posts + 1 });
+
+      setPosts(postsUpdated);
     }
   }
 

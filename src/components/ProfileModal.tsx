@@ -108,7 +108,13 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
         </div>
         <span>
           Number of posts:
-          {posts.filter((post) => post.user.id === userData.id).length}
+          {
+            posts.filter(
+              (post) =>
+                post.user.id === userData.id ||
+                post.reposted_by?.id === userData.id
+            ).length
+          }
         </span>
         <span>Joined at: {currentDateFormater(userData.date_joined)}</span>
         <div></div>
