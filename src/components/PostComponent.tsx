@@ -1,11 +1,14 @@
 import Image from "next/image";
 import DefaultImage from "../public/image-default.svg";
 import { BiRepost } from "react-icons/bi";
+import { FaRegCommentDots } from "react-icons/fa";
 
-import styles from "../styles/components/PostComponent.module.scss";
 import { Post, usePosts } from "../contexts/PostsContext";
 import { useUser } from "../contexts/UserContext";
 import { useRouter } from "next/router";
+import { CommentSection } from "./CommentSection";
+
+import styles from "../styles/components/PostComponent.module.scss";
 
 type PostComponentProps = {
   post: Post;
@@ -55,7 +58,11 @@ export function PostComponent({ post }: PostComponentProps) {
             >
               <BiRepost size={20} />
             </button>
+            <button style={{ color: "var(--title)" }}>
+              <FaRegCommentDots size={20} />
+            </button>
           </div>
+          <CommentSection comments={post.comments} />
         </div>
       </div>
     );

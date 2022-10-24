@@ -17,7 +17,7 @@ export function NewPost() {
     e.preventDefault();
     if (user && newPostTextArea.length <= postMaxCaracteres) {
       const newPost: Post = {
-        id: { $oid: uuid() },
+        id: uuid(),
         user: {
           id: user.id,
           avatar_url:
@@ -31,6 +31,7 @@ export function NewPost() {
         posted_at: currentDateFormater(),
         reposted_by: null,
         post_text: newPostTextArea,
+        comments: [],
       };
       const postsUpdated = [newPost, ...posts];
       setPosts(postsUpdated);

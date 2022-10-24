@@ -10,15 +10,18 @@ import posts_mock from "../public/posts_mock.json";
 import { User } from "./UserContext";
 
 export type Post = {
-  id: Id;
+  id: string;
   user: User;
   post_text: string;
   posted_at: string;
   reposted_by?: User | null;
+  comments: Comment[];
 };
 
-type Id = {
-  $oid: string;
+export type Comment = {
+  id: string;
+  user: User;
+  comment_text: string;
 };
 
 type PostsContextData = {

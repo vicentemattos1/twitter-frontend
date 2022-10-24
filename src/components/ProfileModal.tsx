@@ -121,10 +121,7 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
         {posts.map((post) => {
           if (post.user.id === userData.id) {
             return (
-              <div
-                key={post.id.$oid}
-                style={{ display: "flex", width: "100%" }}
-              >
+              <div key={post.id} style={{ display: "flex", width: "100%" }}>
                 <PostComponent post={post} />
               </div>
             );
