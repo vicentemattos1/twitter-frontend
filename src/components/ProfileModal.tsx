@@ -112,7 +112,10 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
             posts.filter(
               (post) =>
                 post.user.id === userData.id ||
-                post.reposted_by?.id === userData.id
+                post.reposted_by?.id === userData.id ||
+                !!post.comments.find(
+                  (comment) => comment.user.id === userData.id
+                )
             ).length
           }
         </span>
