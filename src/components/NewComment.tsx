@@ -1,13 +1,15 @@
-import Image from "next/image";
 import { FormEvent, useState } from "react";
 import { uuid } from "uuidv4";
-import { Post, usePosts } from "../contexts/PostsContext";
+import { Comment, Post, usePosts } from "../contexts/PostsContext";
 import { useUser } from "../contexts/UserContext";
 
 import styles from "../styles/components/NewComment.module.scss";
-import { currentDateFormater } from "../utils/currentDateFormater";
 
-export function NewComment() {
+type NewComment = {
+  post_id: string;
+};
+
+export function NewComment({ post_id }: NewComment) {
   const [newCommentTextArea, setNewCommentTextArea] = useState("");
   const { user } = useUser();
   const { posts, setPosts } = usePosts();
@@ -16,7 +18,7 @@ export function NewComment() {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (user && newCommentTextArea.length <= commentMaxCaracteres) {
-      const newPost: Post = {
+      const newComment: Comment = {
         id: uuid(),
         user: {
           id: user.id,
@@ -28,12 +30,17 @@ export function NewComment() {
           num_followers: user.num_followers,
           num_following: user.num_following,
         },
-        posted_at: currentDateFormater(),
-        reposted_by: null,
-        post_text: newCommentTextArea,
-        comments: [],
+        comment_text: newCommentTextArea,
       };
-      const postsUpdated = [newPost, ...posts];
+
+      const postsUpdated = posts.map((post) =>
+        post.id === post_id
+          ? {
+              ...post,
+              comments: [newComment, ...post.comments],
+            }
+          : post
+      );
       setPosts(postsUpdated);
       setNewCommentTextArea("");
     }

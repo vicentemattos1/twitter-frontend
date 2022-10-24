@@ -58,7 +58,9 @@ export function PostComponent({ post }: PostComponentProps) {
               <FaRegCommentDots size={20} />
             </button>
           </div>
-          {showComments && <CommentSection comments={post.comments} />}
+          {showComments && (
+            <CommentSection comments={post.comments} post_id={post.id} />
+          )}
         </div>
       </div>
     );
