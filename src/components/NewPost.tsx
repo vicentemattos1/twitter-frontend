@@ -9,13 +9,13 @@ import { currentDateFormater } from "../utils/currentDateFormater";
 
 export function NewPost() {
   const [newPostTextArea, setNewPostTextArea] = useState("");
-  const { user } = useUser();
+  const { user, userCanPost } = useUser();
   const { posts, setPosts } = usePosts();
   const postMaxCaracteres = 777;
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (user && newPostTextArea.length <= postMaxCaracteres) {
+    if (user && userCanPost() && newPostTextArea.length <= postMaxCaracteres) {
       const newPost: Post = {
         id: uuid(),
         user: {

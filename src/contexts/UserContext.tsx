@@ -18,16 +18,12 @@ export type User = {
   avatar_url: string;
 };
 
-type UserControl = {
-  count: number;
-  date: string;
-};
-
 type UserContextData = {
   user: User | null;
   setUser: (user: User) => void;
-  userPostsControl: UserControl;
-  setUserPostsControl: (userPostsControl: UserControl) => void;
+  userTodayPosts: number;
+  setUserTodayPosts: (userTodayPosts: number) => void;
+  userCanPost: () => boolean;
 };
 
 type UserProviderProps = {
@@ -38,10 +34,15 @@ const UserContext = createContext({} as UserContextData);
 
 export function UserProvider({ children }: UserProviderProps) {
   const [user, setUser] = useState<User | null>(null);
-  const [userPostsControl, setUserPostsControl] = useState<UserControl>({
-    count: 0,
-    date: currentDateFormater(),
-  });
+  const [userTodayPosts, setUserTodayPosts] = useState(0);
+  const userPostsDayLimit = 5;
+
+  function userCanPost() {
+    if (userTodayPosts < userPostsDayLimit) {
+      return true;
+    }
+    return false;
+  }
 
   useEffect(() => {
     const userLocalStorageData = localStorage.getItem("user_data") || "";
@@ -65,7 +66,13 @@ export function UserProvider({ children }: UserProviderProps) {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, userPostsControl, setUserPostsControl }}
+      value={{
+        user,
+        setUser,
+        userTodayPosts,
+        setUserTodayPosts,
+        userCanPost,
+      }}
     >
       {children}
     </UserContext.Provider>

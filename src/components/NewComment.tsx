@@ -12,13 +12,17 @@ type NewComment = {
 
 export function NewComment({ post_id }: NewComment) {
   const [newCommentTextArea, setNewCommentTextArea] = useState("");
-  const { user } = useUser();
+  const { user, userCanPost } = useUser();
   const { posts, setPosts } = usePosts();
   const commentMaxCaracteres = 140;
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (user && newCommentTextArea.length <= commentMaxCaracteres) {
+    if (
+      user &&
+      userCanPost() &&
+      newCommentTextArea.length <= commentMaxCaracteres
+    ) {
       const newComment: Comment = {
         id: uuid(),
         user: {

@@ -48,7 +48,7 @@ export function PostsProvider({ children }: PostsProviderProps) {
   const { page_id } = router.query;
   const [posts, setPosts] = useState<Post[]>([]);
   const [isFilterSelected, setIsFilterSelected] = useState(false);
-  const { setUserPostsControl } = useUser();
+  const { setUserTodayPosts } = useUser();
   const { user } = useUser();
 
   function countTodayUserPosts(posts: Post[]) {
@@ -79,7 +79,7 @@ export function PostsProvider({ children }: PostsProviderProps) {
       }
       return amount;
     }, 0);
-    console.log(count);
+    setUserTodayPosts(count);
   }
 
   useEffect(() => {

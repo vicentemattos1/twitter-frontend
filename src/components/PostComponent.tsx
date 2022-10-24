@@ -18,12 +18,12 @@ type PostComponentProps = {
 
 export function PostComponent({ post }: PostComponentProps) {
   const router = useRouter();
-  const { user } = useUser();
+  const { user, userCanPost } = useUser();
   const { posts, setPosts } = usePosts();
   const [showComments, setShowComments] = useState(false);
 
   function handleRepost(post: Post) {
-    if (user) {
+    if (user && userCanPost()) {
       const postsUpdated = [
         { ...post, reposted_by: { user, reposted_at: currentDateFormater() } },
         ...posts,
