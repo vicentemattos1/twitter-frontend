@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import { User, useUser } from "../contexts/UserContext";
 import { PostComponent } from "./PostComponent";
 import styles from "../styles/components/ProfileModal.module.scss";
-import { usePosts } from "../contexts/PostsContext";
+import { Post, usePosts } from "../contexts/PostsContext";
 import { useState, useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { currentDateFormater } from "../utils/currentDateFormater";
@@ -17,8 +17,28 @@ type ProfileModalProps = {
 export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
   const router = useRouter();
   const { user } = useUser();
-  const { posts } = usePosts();
+  const { posts, setPosts } = usePosts();
   const [userData, setUserData] = useState<User>({} as User);
+
+  function handleUnfollow(id: string) {
+    const updatedPosts: Post[] = posts.map((post) =>
+      post.user.id === id
+        ? { ...post, user: { ...post.user, following: false } }
+        : post
+    );
+    if (updatedPosts) {
+      setPosts([...updatedPosts]);
+    }
+  }
+
+  function handleFollow(id: string) {
+    const updatedPosts: Post[] = posts.map((post) =>
+      post.user.id === id
+        ? { ...post, user: { ...post.user, following: true } }
+        : post
+    );
+    setPosts([...updatedPosts]);
+  }
 
   useEffect(() => {
     if (router.asPath === "/profile" && user) {
@@ -65,11 +85,16 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
           <strong>{userData.username}</strong>
           {userData.id !== user?.id ? (
             userData.following ? (
-              <button className={styles["following"]}>
+              <button
+                className={styles["following"]}
+                onClick={() => handleUnfollow(userData.id)}
+              >
                 <span>Following</span>
               </button>
             ) : (
-              <button onClick={() => {}}>+ Follow</button>
+              <button onClick={() => handleFollow(userData.id)}>
+                + Follow
+              </button>
             )
           ) : null}
         </div>
