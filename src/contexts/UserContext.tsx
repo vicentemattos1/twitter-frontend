@@ -15,7 +15,6 @@ export type User = {
   num_followers: number;
   num_following: number;
   avatar_url: string;
-  number_posts: number;
 };
 
 type UserContextData = {
@@ -44,7 +43,6 @@ export function UserProvider({ children }: UserProviderProps) {
           "https://avatars.githubusercontent.com/u/48080194?s=400&u=186f9e014dbd489912da4d1d5194e2b2137c0e52&v=4",
         num_followers: 0,
         num_following: 3,
-        number_posts: 0,
       };
       localStorage.setItem("user_data", JSON.stringify(userInit));
       setUser(userInit);

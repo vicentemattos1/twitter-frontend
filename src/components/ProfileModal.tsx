@@ -82,7 +82,7 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
           alt="Vicente Mattos"
         />
         <div className={styles["profile-btn"]}>
-          <strong>{userData.username.slice(0, 14)}</strong>
+          <strong>{userData.username?.slice(0, 14)}</strong>
           {userData.id !== user?.id ? (
             userData.following ? (
               <button
@@ -102,7 +102,7 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
           <span>Following: {userData.num_following}</span>
           <span>Followers: {userData.num_followers}</span>
         </div>
-        <span>Number of posts: {userData.number_posts}</span>
+        {/* <span>Number of posts: {userData.number_posts}</span> */}
         <span>Joined at: {currentDateFormater(userData.date_joined)}</span>
         <div></div>
         {posts.map((post) => {

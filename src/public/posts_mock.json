@@ -8,8 +8,7 @@
       "date_joined": "7/4/2022",
       "following": true,
       "num_followers": 0,
-      "num_following": 0,
-      "number_posts": 1
+      "num_following": 0
     },
     "posted_at": "7/10/2022",
     "post_text": "libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed vel enim sit amet nunc viverra dapibus nulla suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus sit amet nulla quisque arcu",
@@ -24,8 +23,7 @@
       "date_joined": "4/26/2022",
       "following": true,
       "num_followers": 0,
-      "num_following": 0,
-      "number_posts": 1
+      "num_following": 0
     },
     "posted_at": "10/20/2022",
     "post_text": "ultrices aliquet maecenas leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam cras pellentesque volutpat dui maecenas tristique",
@@ -40,8 +38,7 @@
       "date_joined": "3/25/2022",
       "following": false,
       "num_followers": 0,
-      "num_following": 0,
-      "number_posts": 1
+      "num_following": 0
     },
     "posted_at": "10/20/2022",
     "post_text": "eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est risus auctor sed tristique in tempus sit amet sem fusce consequat nulla nisl nunc nisl duis bibendum felis sed interdum venenatis turpis enim blandit mi in porttitor pede justo eu",
@@ -56,8 +53,7 @@
       "date_joined": "1/7/2022",
       "following": true,
       "num_followers": 0,
-      "num_following": 0,
-      "number_posts": 2
+      "num_following": 0
     },
     "posted_at": "09/15/2022",
     "post_text": "orci luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis",
@@ -72,8 +68,7 @@
       "date_joined": "1/7/2022",
       "following": true,
       "num_followers": 0,
-      "num_following": 0,
-      "number_posts": 2
+      "num_following": 0
     },
     "posted_at": "09/20/2022",
     "post_text": "natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean",
@@ -88,8 +83,7 @@
       "date_joined": "2/21/2022",
       "following": false,
       "num_followers": 0,
-      "num_following": 0,
-      "number_posts": 1
+      "num_following": 0
     },
     "posted_at": "10/02/2022",
     "post_text": "in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse",
@@ -104,8 +98,7 @@
       "date_joined": "12/28/2021",
       "following": false,
       "num_followers": 0,
-      "num_following": 0,
-      "number_posts": 2
+      "num_following": 0
     },
     "posted_at": "10/05/2022",
     "post_text": "volutpat quam pede lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in",
@@ -120,8 +113,7 @@
       "date_joined": "12/28/2021",
       "following": false,
       "num_followers": 0,
-      "num_following": 0,
-      "number_posts": 2
+      "num_following": 0
     },
     "posted_at": "10/14/2022",
     "post_text": "donec posuere metus vitae ipsum aliquam non mauris morbi non lectus aliquam sit amet diam in magna bibendum imperdiet nullam orci pede venenatis",
