@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import {
   createContext,
   ReactNode,
@@ -23,6 +24,7 @@ type Id = {
 type PostsContextData = {
   posts: Post[];
   setPosts: (posts: Post[]) => void;
+  isFilterSelected: boolean;
 };
 
 type PostsProviderProps = {
@@ -32,7 +34,10 @@ type PostsProviderProps = {
 const PostsContext = createContext({} as PostsContextData);
 
 export function PostsProvider({ children }: PostsProviderProps) {
+  const router = useRouter();
+  const { page_id } = router.query;
   const [posts, setPosts] = useState<Post[]>([]);
+  const [isFilterSelected, setIsFilterSelected] = useState(false);
 
   useEffect(() => {
     if (!!(posts.length > 0)) {
@@ -53,11 +58,20 @@ export function PostsProvider({ children }: PostsProviderProps) {
     }
   }, [posts]);
 
+  useEffect(() => {
+    if (page_id == "following") {
+      setIsFilterSelected(true);
+    } else {
+      setIsFilterSelected(false);
+    }
+  }, [page_id]);
+
   return (
     <PostsContext.Provider
       value={{
         posts,
         setPosts,
+        isFilterSelected,
       }}
     >
       {children}
