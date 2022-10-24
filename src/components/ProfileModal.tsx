@@ -102,7 +102,10 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
           <span>Following: {userData.num_following}</span>
           <span>Followers: {userData.num_followers}</span>
         </div>
-        {/* <span>Number of posts: {userData.number_posts}</span> */}
+        <span>
+          Number of posts:
+          {posts.filter((post) => post.user.id === userData.id).length}
+        </span>
         <span>Joined at: {currentDateFormater(userData.date_joined)}</span>
         <div></div>
         {posts.map((post) => {
