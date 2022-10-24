@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.close-btn {
+  border: 0;
+  background: none;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  z-index: 10;
+}
