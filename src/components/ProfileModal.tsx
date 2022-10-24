@@ -16,7 +16,7 @@ type ProfileModalProps = {
 
 export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
   const router = useRouter();
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const { posts, setPosts } = usePosts();
   const [userData, setUserData] = useState<User>({} as User);
 
@@ -26,8 +26,9 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
         ? { ...post, user: { ...post.user, following: false } }
         : post
     );
-    if (updatedPosts) {
+    if (updatedPosts && user) {
       setPosts([...updatedPosts]);
+      setUser({ ...user, num_following: user.num_following - 1 });
     }
   }
 
@@ -37,7 +38,10 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
         ? { ...post, user: { ...post.user, following: true } }
         : post
     );
-    setPosts([...updatedPosts]);
+    if (updatedPosts && user) {
+      setPosts([...updatedPosts]);
+      setUser({ ...user, num_following: user.num_following + 1 });
+    }
   }
 
   useEffect(() => {
