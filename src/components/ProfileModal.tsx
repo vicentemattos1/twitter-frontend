@@ -82,7 +82,7 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
           alt="Vicente Mattos"
         />
         <div className={styles["profile-btn"]}>
-          <strong>{userData.username}</strong>
+          <strong>{userData.username.slice(0, 14)}</strong>
           {userData.id !== user?.id ? (
             userData.following ? (
               <button
