@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 250px;
+  padding: 1rem 3rem;
+  border-right: 2px solid var(--gray-line);
+  font-size: 2rem;
+  position: fixed;
+  h1 {
+    color: var(--title);
+  }
+
+  ul {
+    margin-top: 2rem;
+    list-style-type: none;
+  }
+}
+
+.nav_option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  :first-child {
+    margin-right: 0.5rem;
+  }
+
+  a {
+    font-size: 1.3rem;
+    border: none;
+  }
+}
+
+.active {
+  color: var(--blue);
+}
