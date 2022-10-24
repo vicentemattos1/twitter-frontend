@@ -1,9 +1,9 @@
-import { usePosts } from "../contexts/PostsContext";
 import { PostComponent } from "./PostComponent";
-
-import styles from "../styles/components/PostsSection.module.scss";
 import { NewPost } from "./NewPost";
 import { useRouter } from "next/router";
+import { usePosts } from "../contexts/PostsContext";
+
+import styles from "../styles/components/PostsSection.module.scss";
 
 export function PostsSection() {
   const router = useRouter();
@@ -16,6 +16,7 @@ export function PostsSection() {
       router.push("/posts/following");
     }
   }
+
   return (
     <main className={styles["container"]}>
       <NewPost />
