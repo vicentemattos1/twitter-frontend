@@ -6,7 +6,8 @@ import {
   useState,
 } from "react";
 import { uuid } from "uuidv4";
-import { currentDateFormater } from "../utils/currentDateFormater";
+
+import Swal from "sweetalert2";
 
 export type User = {
   id: string;
@@ -41,6 +42,11 @@ export function UserProvider({ children }: UserProviderProps) {
     if (userTodayPosts < userPostsDayLimit) {
       return true;
     }
+    Swal.fire({
+      icon: "error",
+      title: "Limit of posts reached!",
+      text: `Limit: ${userPostsDayLimit}`,
+    });
     return false;
   }
 

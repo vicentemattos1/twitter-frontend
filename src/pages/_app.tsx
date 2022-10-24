@@ -6,6 +6,7 @@ import { Sidebar } from "../components/Sidebar";
 
 import styles from "../styles/pages/Layout.module.scss";
 import "../styles/globals.scss";
+import "sweetalert2/src/sweetalert2.scss";
 
 Modal.setAppElement("#__next");
 
