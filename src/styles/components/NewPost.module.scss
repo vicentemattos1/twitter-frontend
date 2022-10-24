@@ -23,17 +23,29 @@
       border: none;
       margin-left: 0.5rem;
       word-wrap: break-word;
+      outline: none;
     }
 
-    button {
-      margin-top: 0.5rem;
+    textarea.active {
+      border: solid 2px var(--red);
+    }
+
+    > div {
       margin-left: auto;
-      border: none;
-      width: 80px;
-      padding: 0.4rem 0;
-      border-radius: 20px;
-      background: var(--blue);
-      color: var(--white);
+      color: var(--blue);
+      button {
+        margin-top: 0.5rem;
+        border: none;
+        margin-left: 0.5rem;
+        width: 80px;
+        padding: 0.4rem 0;
+        border-radius: 20px;
+        background: var(--blue);
+        color: var(--white);
+      }
+      .active {
+        color: var(--red);
+      }
     }
   }
 }

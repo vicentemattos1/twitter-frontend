@@ -11,10 +11,11 @@ export function NewPost() {
   const [newPostTextArea, setNewPostTextArea] = useState("");
   const { user, setUser } = useUser();
   const { posts, setPosts } = usePosts();
+  const postMaxCaracteres = 777;
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (user) {
+    if (user && newPostTextArea.length <= postMaxCaracteres) {
       const newPost: Post = {
         id: { $oid: uuid() },
         user: {
@@ -69,8 +70,20 @@ export function NewPost() {
           name="textarea"
           value={newPostTextArea}
           onChange={(e) => setNewPostTextArea(e.target.value)}
+          className={
+            newPostTextArea.length > postMaxCaracteres ? styles["active"] : ""
+          }
         />
-        <button type="submit">Post</button>
+        <div>
+          <span
+            className={
+              newPostTextArea.length > postMaxCaracteres ? styles["active"] : ""
+            }
+          >
+            {`${newPostTextArea.length}/${postMaxCaracteres}`}
+          </span>
+          <button type="submit">Post</button>
+        </div>
       </form>
     </div>
   );
