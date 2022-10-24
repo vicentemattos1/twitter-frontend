@@ -2,7 +2,7 @@
   display: flex;
   flex: 1;
   align-items: flex-start;
-  padding: 1rem 0;
+  padding: 1rem;
   margin-top: 1rem;
   border-radius: 20px;
   border: solid 2px var(--gray-line);
@@ -22,5 +22,6 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding-left: 0.5rem;
   }
 }
