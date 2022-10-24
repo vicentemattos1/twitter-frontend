@@ -2,9 +2,9 @@
   display: flex;
   max-height: 200px;
   align-items: flex-start;
-  margin: 0 1rem;
-  padding: 1rem 0;
-  border-bottom: solid 2px var(--gray-line);
+  padding: 1rem;
+  border: solid 2px var(--gray-line);
+  border-radius: 20px;
 
   :first-child {
     min-width: 50px;
