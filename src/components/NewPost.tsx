@@ -40,7 +40,13 @@ export function NewPost() {
   }
 
   return (
-    <div className={styles["container"]}>
+    <div
+      className={`${styles["container"]} ${
+        newPostTextArea.length > postMaxCaracteres
+          ? styles["container_active"]
+          : ""
+      }`}
+    >
       <Image
         unoptimized
         width={50}
@@ -58,9 +64,6 @@ export function NewPost() {
           name="textarea"
           value={newPostTextArea}
           onChange={(e) => setNewPostTextArea(e.target.value)}
-          className={
-            newPostTextArea.length > postMaxCaracteres ? styles["active"] : ""
-          }
         />
         <div>
           <span
