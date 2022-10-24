@@ -4,7 +4,58 @@
   justify-content: center;
   align-items: center;
   position: relative;
+
+  span {
+    margin-top: 1rem;
+  }
+  .image {
+    border-radius: 50%;
+    max-width: 150px;
+    max-height: 150px;
+  }
+
+  .profile-btn {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    strong {
+      font-size: 1.5rem;
+    }
+    button {
+      margin-left: 0.5rem;
+      border: none;
+      color: var(--blue);
+      background: none;
+    }
+
+    .following:hover {
+      span {
+        display: none;
+      }
+    }
+    .following:hover:before {
+      color: var(--red);
+      content: "Unfollow";
+    }
+  }
+
+  > div {
+    span {
+      margin-right: 1rem;
+    }
+  }
 }
+
+.following:hover {
+  span {
+    display: none;
+  }
+}
+.following:hover:before {
+  color: var(--red);
+  content: "Unfollow";
+}
+
 .close-btn {
   border: 0;
   background: none;
