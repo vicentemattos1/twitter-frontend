@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  margin-top: 1rem;
+  border: solid 2px var(--gray-line);
+  border-radius: 20px;
+  padding: 0.5rem;
+  strong {
+    font-size: 0.8rem;
+  }
+  > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}

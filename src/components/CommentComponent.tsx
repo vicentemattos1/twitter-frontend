@@ -22,15 +22,9 @@ export function CommentComponent({ comment }: CommentComponentProps) {
       />
       <div>
         <div>
-          <div>
-            <div>
-              <button
-                onClick={() => router.push(`/profile/${comment.user.id}`)}
-              >
-                <strong>{comment.user.username}</strong>
-              </button>
-            </div>
-          </div>
+          <button onClick={() => router.push(`/profile/${comment.user.id}`)}>
+            <strong>{comment.user.username}</strong>
+          </button>
         </div>
         <span>{comment.comment_text}</span>
       </div>
