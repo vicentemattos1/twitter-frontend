@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useState } from "react";
 import DefaultImage from "../public/image-default.svg";
 import { BiRepost } from "react-icons/bi";
 import { FaRegCommentDots } from "react-icons/fa";
@@ -16,8 +17,9 @@ type PostComponentProps = {
 
 export function PostComponent({ post }: PostComponentProps) {
   const router = useRouter();
-  const { user, setUser } = useUser();
+  const { user } = useUser();
   const { posts, setPosts } = usePosts();
+  const [showComments, setShowComments] = useState(false);
 
   function handleRepost(post: Post) {
     if (user) {
@@ -39,30 +41,24 @@ export function PostComponent({ post }: PostComponentProps) {
         />
         <div>
           <div>
-            <div>
-              <div>
-                <button onClick={() => router.push(`/profile/${post.user.id}`)}>
-                  <strong>{post.user.username}</strong>
-                  {post.reposted_by?.username && (
-                    <span> Reposted by: {post.reposted_by?.username}</span>
-                  )}
-                </button>
-              </div>
-            </div>
+            <button onClick={() => router.push(`/profile/${post.user.id}`)}>
+              <strong>{post.user.username}</strong>
+            </button>
+            {post.reposted_by?.username && (
+              <span> Reposted by: {post.reposted_by?.username}</span>
+            )}
           </div>
           <span>{post.post_text}</span>
-          <div style={{ marginTop: "1rem" }}>
-            <button
-              style={{ color: "var(--title)" }}
-              onClick={() => handleRepost(post)}
-            >
+          <div className={styles["options"]}>
+            <button onClick={() => handleRepost(post)}>
               <BiRepost size={20} />
             </button>
-            <button style={{ color: "var(--title)" }}>
+            <button onClick={() => setShowComments(!showComments)}>
+              <span>{post.comments.length}</span>
               <FaRegCommentDots size={20} />
             </button>
           </div>
-          <CommentSection comments={post.comments} />
+          {showComments && <CommentSection comments={post.comments} />}
         </div>
       </div>
     );
