@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex: 1;
+  max-height: 300px;
+  align-items: flex-start;
+  padding: 1rem 0;
+  border-bottom: solid 2px var(--gray-line);
+
+  button {
+    border: none;
+    font-weight: bold;
+    width: 100px;
+  }
+
+  img {
+    border-radius: 50%;
+  }
+  > div {
+    margin-left: 0.5rem;
+    flex: 1;
+  }
+
+  > div {
+    > div {
+      display: flex;
+      justify-content: space-between;
+      :first-child {
+        border: none;
+        width: 100%;
+        max-width: 300px;
+        text-align: start;
+        align-items: center;
+        span {
+          font-size: 0.7rem;
+          margin-left: 0.5rem;
+        }
+        strong {
+          color: var(--title);
+        }
+      }
+
+      button {
+        color: var(--blue);
+        background: none;
+      }
+    }
+  }
+}
