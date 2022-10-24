@@ -5,12 +5,14 @@ import { BiRepost } from "react-icons/bi";
 import styles from "../styles/components/PostComponent.module.scss";
 import { Post, usePosts } from "../contexts/PostsContext";
 import { useUser } from "../contexts/UserContext";
+import { useRouter } from "next/router";
 
 type PostComponentProps = {
   post: Post;
 };
 
 export function PostComponent({ post }: PostComponentProps) {
+  const router = useRouter();
   const { user, setUser } = useUser();
   const { posts, setPosts } = usePosts();
 
@@ -48,7 +50,7 @@ export function PostComponent({ post }: PostComponentProps) {
           <div>
             <div>
               <div>
-                <button>
+                <button onClick={() => router.push(`/profile/${post.user.id}`)}>
                   <strong>{post.user.username}</strong>
                   {post.reposted_by?.username && (
                     <span> Reposted by: {post.reposted_by?.username}</span>
