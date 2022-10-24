@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { uuid } from "uuidv4";
+import { currentDateFormater } from "../utils/currentDateFormater";
 
 export type User = {
   id: string;
@@ -17,9 +18,16 @@ export type User = {
   avatar_url: string;
 };
 
+type UserControl = {
+  count: number;
+  date: string;
+};
+
 type UserContextData = {
   user: User | null;
   setUser: (user: User) => void;
+  userPostsControl: UserControl;
+  setUserPostsControl: (userPostsControl: UserControl) => void;
 };
 
 type UserProviderProps = {
@@ -30,6 +38,10 @@ const UserContext = createContext({} as UserContextData);
 
 export function UserProvider({ children }: UserProviderProps) {
   const [user, setUser] = useState<User | null>(null);
+  const [userPostsControl, setUserPostsControl] = useState<UserControl>({
+    count: 0,
+    date: currentDateFormater(),
+  });
 
   useEffect(() => {
     const userLocalStorageData = localStorage.getItem("user_data") || "";
@@ -52,7 +64,9 @@ export function UserProvider({ children }: UserProviderProps) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider
+      value={{ user, setUser, userPostsControl, setUserPostsControl }}
+    >
       {children}
     </UserContext.Provider>
   );

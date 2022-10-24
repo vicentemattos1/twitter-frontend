@@ -13,13 +13,16 @@ export function CommentComponent({ comment }: CommentComponentProps) {
   const router = useRouter();
   return (
     <div className={styles["container"]}>
-      <Image
-        width={50}
-        height={50}
-        loader={() => comment.user.avatar_url || DefaultImage}
-        src={comment.user.avatar_url || DefaultImage}
-        alt="User image"
-      />
+      {comment && comment.user && (
+        <Image
+          unoptimized
+          width={50}
+          height={50}
+          loader={() => comment.user.avatar_url || DefaultImage}
+          src={comment.user.avatar_url || DefaultImage}
+          alt="User image"
+        />
+      )}
       <div>
         <div>
           <button onClick={() => router.push(`/profile/${comment.user.id}`)}>

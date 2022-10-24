@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Comment } from "../contexts/PostsContext";
 import { CommentComponent } from "./CommentComponent";
 import { NewComment } from "./NewComment";

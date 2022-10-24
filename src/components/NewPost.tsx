@@ -42,6 +42,7 @@ export function NewPost() {
   return (
     <div className={styles["container"]}>
       <Image
+        unoptimized
         width={50}
         height={50}
         loader={() =>

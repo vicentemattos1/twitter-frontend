@@ -4,6 +4,7 @@ import { Comment, Post, usePosts } from "../contexts/PostsContext";
 import { useUser } from "../contexts/UserContext";
 
 import styles from "../styles/components/NewComment.module.scss";
+import { currentDateFormater } from "../utils/currentDateFormater";
 
 type NewComment = {
   post_id: string;
@@ -30,6 +31,7 @@ export function NewComment({ post_id }: NewComment) {
           num_followers: user.num_followers,
           num_following: user.num_following,
         },
+        commented_at: currentDateFormater(),
         comment_text: newCommentTextArea,
       };
 

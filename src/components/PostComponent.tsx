@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { CommentSection } from "./CommentSection";
 
 import styles from "../styles/components/PostComponent.module.scss";
+import { currentDateFormater } from "../utils/currentDateFormater";
 
 type PostComponentProps = {
   post: Post;
@@ -23,7 +24,10 @@ export function PostComponent({ post }: PostComponentProps) {
 
   function handleRepost(post: Post) {
     if (user) {
-      const postsUpdated = [{ ...post, reposted_by: user }, ...posts];
+      const postsUpdated = [
+        { ...post, reposted_by: { user, reposted_at: currentDateFormater() } },
+        ...posts,
+      ];
 
       setPosts(postsUpdated);
     }
@@ -33,6 +37,7 @@ export function PostComponent({ post }: PostComponentProps) {
     return (
       <div className={styles["container"]}>
         <Image
+          unoptimized
           width={50}
           height={50}
           loader={() => post.user.avatar_url || DefaultImage}
@@ -44,8 +49,8 @@ export function PostComponent({ post }: PostComponentProps) {
             <button onClick={() => router.push(`/profile/${post.user.id}`)}>
               <strong>{post.user.username}</strong>
             </button>
-            {post.reposted_by?.username && (
-              <span> Reposted by: {post.reposted_by?.username}</span>
+            {post.reposted_by?.user?.username && (
+              <span> Reposted by: {post.reposted_by?.user.username}</span>
             )}
           </div>
           <span>{post.post_text}</span>

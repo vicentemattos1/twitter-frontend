@@ -77,14 +77,16 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
         <AiOutlineCloseCircle size={28} />
       </button>
       <main className={styles["container"]}>
-        <Image
-          width={150}
-          height={150}
-          className={styles["image"]}
-          src={userData.avatar_url}
-          loader={() => userData.avatar_url}
-          alt="Vicente Mattos"
-        />
+        {user && user.avatar_url && (
+          <Image
+            src={user.avatar_url}
+            unoptimized
+            width={150}
+            height={150}
+            className={styles["image"]}
+            alt="Vicente Mattos"
+          />
+        )}
         <div className={styles["profile-btn"]}>
           <strong>{userData.username?.slice(0, 14)}</strong>
           {userData.id !== user?.id ? (
@@ -107,17 +109,26 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
           <span>Followers: {userData.num_followers}</span>
         </div>
         <span>
-          Number of posts:
-          {
-            posts.filter(
-              (post) =>
-                post.user.id === userData.id ||
-                post.reposted_by?.id === userData.id ||
-                !!post.comments.find(
+          Number of posts:{" "}
+          {posts.reduce((amount, post) => {
+            if (post.user.id === userData.id) {
+              return amount + 1;
+            } else if (
+              post.reposted_by &&
+              post.reposted_by.user &&
+              post.reposted_by.user.id === userData.id
+            ) {
+              return amount + 1;
+            } else if (post.comments.length > 0) {
+              return (
+                amount +
+                post.comments.filter(
                   (comment) => comment.user.id === userData.id
-                )
-            ).length
-          }
+                ).length
+              );
+            }
+            return amount;
+          }, 0)}
         </span>
         <span>Joined at: {currentDateFormater(userData.date_joined)}</span>
         <div></div>
