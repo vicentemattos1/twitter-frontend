@@ -20,7 +20,6 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
   const { user, setUser } = useUser();
   const { posts, setPosts } = usePosts();
   const [userData, setUserData] = useState<User>({} as User);
-
   function handleUnfollow(id: string) {
     const updatedPosts: Post[] = posts.map((post) =>
       post.user.id === id
@@ -137,11 +136,11 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
           </div>
         </div>
 
-        <NewPost />
+        {!router.query.user_id && <NewPost />}
 
-        {posts.map((post) => {
+        {posts.map((post, index) => {
           if (post.user.id === userData.id) {
-            return <PostComponent key={post.id} post={post} />;
+            return <PostComponent key={index} post={post} />;
           }
           return;
         })}
