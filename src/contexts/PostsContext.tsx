@@ -97,8 +97,9 @@ export function PostsProvider({ children }: PostsProviderProps) {
       if (!postsLocalStorage) {
         const postsInit: Post[] = posts_mock.sort(
           (date1, date2) =>
-            +new Date(date1.posted_at) - +new Date(date2.posted_at)
+            +new Date(date2.posted_at) - +new Date(date1.posted_at)
         );
+        console.log(postsInit.map((post) => post.posted_at));
         localStorage.setItem("posts", JSON.stringify(postsInit));
         setPosts(postsInit);
         countTodayUserPosts(postsInit);
