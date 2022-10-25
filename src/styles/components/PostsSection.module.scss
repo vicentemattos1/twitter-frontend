@@ -6,6 +6,10 @@
   margin-left: calc(250px + 7.5vw);
   display: flex;
   flex-direction: column;
+
+  img {
+    z-index: -1;
+  }
 }
 
 /* The switch - the box around the slider */
