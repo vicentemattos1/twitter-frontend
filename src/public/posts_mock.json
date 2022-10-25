@@ -76,7 +76,22 @@
     "posted_at": "09/15/2022",
     "post_text": "orci luctus et ultrices posuere cubilia curae donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis",
     "reposted_by": null,
-    "comments": []
+    "comments": [
+      {
+        "id": "2",
+        "user": {
+          "id": "6",
+          "avatar_url": "https://robohash.org/utrecusandaequi.png?size=50x50&set=set1",
+          "username": "Marlo Atwill",
+          "date_joined": "2/21/2022",
+          "following": false,
+          "num_followers": 0,
+          "num_following": 0
+        },
+        "commented_at": "10/20/2022",
+        "comment_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor e"
+      }
+    ]
   },
   {
     "id": "6355d49dfc13ae1ff9000004",
