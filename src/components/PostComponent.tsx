@@ -11,6 +11,7 @@ import { CommentSection } from "./CommentSection";
 
 import styles from "../styles/components/PostComponent.module.scss";
 import { currentDateFormater } from "../utils/currentDateFormater";
+import Link from "next/link";
 
 type PostComponentProps = {
   post: Post;
@@ -46,11 +47,11 @@ export function PostComponent({ post }: PostComponentProps) {
         />
         <div>
           <div>
-            <button
-              onClick={() => router.push(`/posts/profile/${post.user.id}`)}
-            >
-              <strong>{post.user.username}</strong>
-            </button>
+            <Link href={`/posts/profile/${post.user.id}`}>
+              <a>
+                <strong>{post.user.username}</strong>
+              </a>
+            </Link>
             {post.reposted_by?.user?.username && (
               <span> Reposted by: {post.reposted_by?.user.username}</span>
             )}

@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { currentDateFormater } from "../utils/currentDateFormater";
 import { NewPost } from "./NewPost";
+import Link from "next/link";
 
 type ProfileModalProps = {
   isOpen: boolean;
@@ -59,8 +60,8 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
     <Modal
       style={{
         content: {
-          height: "60%",
-          width: "60%",
+          height: "70%",
+          width: "70%",
           top: "50%",
           left: "50%",
           right: "auto",
@@ -73,9 +74,11 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
       isOpen={isOpen}
       onRequestClose={() => router.back()}
     >
-      <button onClick={() => router.back()} className={styles["close-btn"]}>
-        <AiOutlineCloseCircle size={28} />
-      </button>
+      <Link href="/posts">
+        <a className={styles["close-btn"]}>
+          <AiOutlineCloseCircle size={28} />
+        </a>
+      </Link>
       <main className={styles["container"]}>
         <div className={styles["profile-info"]}>
           {userData && userData.avatar_url && (

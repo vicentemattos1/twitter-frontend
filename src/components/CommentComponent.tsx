@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { Comment } from "../contexts/PostsContext";
 import DefaultImage from "../public/image-default.svg";
@@ -25,11 +26,11 @@ export function CommentComponent({ comment }: CommentComponentProps) {
       )}
       <div>
         <div>
-          <button
-            onClick={() => router.push(`/posts/profile/${comment.user.id}`)}
-          >
-            <strong>{comment.user.username}</strong>
-          </button>
+          <Link href={`/posts/profile/${comment.user.id}`}>
+            <a>
+              <strong>{comment.user.username}</strong>
+            </a>
+          </Link>
         </div>
         <span>{comment.comment_text}</span>
       </div>
