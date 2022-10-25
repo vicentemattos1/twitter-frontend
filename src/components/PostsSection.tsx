@@ -10,7 +10,9 @@ export function PostsSection() {
   const { posts, isFilterSelected, searchInput } = usePosts();
 
   const postsData = searchInput
-    ? posts.filter((post) => post.post_text.includes(searchInput))
+    ? posts.filter((post) =>
+        post.post_text.toLowerCase().includes(searchInput.toLowerCase())
+      )
     : [...posts];
 
   function handleOnChange() {
