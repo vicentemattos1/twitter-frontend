@@ -8,6 +8,7 @@ import { Post, usePosts } from "../contexts/PostsContext";
 import { useState, useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { currentDateFormater } from "../utils/currentDateFormater";
+import { NewPost } from "./NewPost";
 
 type ProfileModalProps = {
   isOpen: boolean;
@@ -136,13 +137,11 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
           </div>
         </div>
 
+        <NewPost />
+
         {posts.map((post) => {
           if (post.user.id === userData.id) {
-            return (
-              <div key={post.id} style={{ display: "flex", width: "100%" }}>
-                <PostComponent post={post} />
-              </div>
-            );
+            return <PostComponent key={post.id} post={post} />;
           }
           return;
         })}

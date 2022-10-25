@@ -14,17 +14,18 @@
     border-radius: 50%;
   }
 
+  textarea {
+    background: var(--background);
+    border: none;
+    margin-left: 0.5rem;
+    word-wrap: break-word;
+    outline: none;
+  }
+
   > form {
     display: flex;
     flex-direction: column;
     flex: 1;
-    textarea {
-      background: var(--background);
-      border: none;
-      margin-left: 0.5rem;
-      word-wrap: break-word;
-      outline: none;
-    }
 
     textarea.active {
       border: solid 2px var(--red);

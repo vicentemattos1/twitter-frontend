@@ -4,9 +4,19 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  align-items: stretch;
+
+  textarea {
+    background: none;
+  }
+
+  > * {
+    margin-bottom: 1rem;
+  }
 
   .profile-info {
     display: flex;
+    justify-content: center;
     margin-bottom: 2rem;
 
     > div {
