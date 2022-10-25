@@ -47,7 +47,8 @@ const PostsContext = createContext({} as PostsContextData);
 
 export function PostsProvider({ children }: PostsProviderProps) {
   const router = useRouter();
-  const { page_id } = router.query;
+  const { page_name } = router.query;
+  console.log(page_name);
   const [posts, setPosts] = useState<Post[]>([]);
 
   const [isFilterSelected, setIsFilterSelected] = useState(false);
@@ -112,12 +113,13 @@ export function PostsProvider({ children }: PostsProviderProps) {
   }, [posts]);
 
   useEffect(() => {
-    if (page_id == "following") {
+    if (page_name == "following") {
+      console.log("Entrei");
       setIsFilterSelected(true);
     } else {
       setIsFilterSelected(false);
     }
-  }, [page_id]);
+  }, [page_name]);
 
   return (
     <PostsContext.Provider
