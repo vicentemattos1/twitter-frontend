@@ -5,10 +5,17 @@
   align-items: center;
   position: relative;
 
+  .profile-info {
+    display: flex;
+    margin-bottom: 2rem;
+
+    > div {
+      margin-left: 1rem;
+    }
+  }
+
   .image {
     border-radius: 50%;
-    max-width: 150px;
-    max-height: 150px;
   }
 
   .profile-btn {

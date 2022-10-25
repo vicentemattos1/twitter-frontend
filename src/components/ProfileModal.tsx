@@ -77,61 +77,65 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
         <AiOutlineCloseCircle size={28} />
       </button>
       <main className={styles["container"]}>
-        {userData && userData.avatar_url && (
-          <Image
-            src={userData.avatar_url}
-            unoptimized
-            width={150}
-            height={150}
-            className={styles["image"]}
-            alt="Vicente Mattos"
-          />
-        )}
-        <div className={styles["profile-btn"]}>
-          <strong>{userData.username?.slice(0, 14)}</strong>
-          {userData.id !== user?.id ? (
-            userData.following ? (
-              <button
-                className={styles["following"]}
-                onClick={() => handleUnfollow(userData.id)}
-              >
-                <span>Following</span>
-              </button>
-            ) : (
-              <button onClick={() => handleFollow(userData.id)}>
-                + Follow
-              </button>
-            )
-          ) : null}
+        <div className={styles["profile-info"]}>
+          {userData && userData.avatar_url && (
+            <Image
+              src={userData.avatar_url}
+              unoptimized
+              width={100}
+              height={100}
+              className={styles["image"]}
+              alt="Vicente Mattos"
+            />
+          )}
+          <div>
+            <div className={styles["profile-btn"]}>
+              <strong>{userData.username?.slice(0, 14)}</strong>
+              {userData.id !== user?.id ? (
+                userData.following ? (
+                  <button
+                    className={styles["following"]}
+                    onClick={() => handleUnfollow(userData.id)}
+                  >
+                    <span>Following</span>
+                  </button>
+                ) : (
+                  <button onClick={() => handleFollow(userData.id)}>
+                    + Follow
+                  </button>
+                )
+              ) : null}
+            </div>
+            <div>
+              <span>
+                Number of posts:{" "}
+                {posts.reduce((amount, post) => {
+                  if (post.user.id === userData.id) {
+                    return amount + 1;
+                  } else if (
+                    post.reposted_by &&
+                    post.reposted_by.user &&
+                    post.reposted_by.user.id === userData.id
+                  ) {
+                    return amount + 1;
+                  } else if (post.comments.length > 0) {
+                    return (
+                      amount +
+                      post.comments.filter(
+                        (comment) => comment.user.id === userData.id
+                      ).length
+                    );
+                  }
+                  return amount;
+                }, 0)}
+              </span>
+              <span>Following: {userData.num_following}</span>
+              <span>Followers: {userData.num_followers}</span>
+            </div>
+            <span>Joined at: {currentDateFormater(userData.date_joined)}</span>
+          </div>
         </div>
-        <div>
-          <span>Following: {userData.num_following}</span>
-          <span>Followers: {userData.num_followers}</span>
-        </div>
-        <span>
-          Number of posts:{" "}
-          {posts.reduce((amount, post) => {
-            if (post.user.id === userData.id) {
-              return amount + 1;
-            } else if (
-              post.reposted_by &&
-              post.reposted_by.user &&
-              post.reposted_by.user.id === userData.id
-            ) {
-              return amount + 1;
-            } else if (post.comments.length > 0) {
-              return (
-                amount +
-                post.comments.filter(
-                  (comment) => comment.user.id === userData.id
-                ).length
-              );
-            }
-            return amount;
-          }, 0)}
-        </span>
-        <span>Joined at: {currentDateFormater(userData.date_joined)}</span>
-        <div></div>
+
         {posts.map((post) => {
           if (post.user.id === userData.id) {
             return (
