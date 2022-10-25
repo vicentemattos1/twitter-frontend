@@ -114,7 +114,6 @@ export function PostsProvider({ children }: PostsProviderProps) {
 
   useEffect(() => {
     if (page_name == "following") {
-      console.log("Entrei");
       setIsFilterSelected(true);
     } else {
       setIsFilterSelected(false);
