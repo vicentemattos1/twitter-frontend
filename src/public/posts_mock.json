@@ -60,7 +60,22 @@
     "posted_at": "10/20/2022",
     "post_text": "eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est risus auctor sed tristique in tempus sit amet sem fusce consequat nulla nisl nunc nisl duis bibendum felis sed interdum venenatis turpis enim blandit mi in porttitor pede justo eu",
     "reposted_by": null,
-    "comments": []
+    "comments": [
+      {
+        "id": "3",
+        "user": {
+          "id": "3",
+          "avatar_url": "https://robohash.org/optiocorruptiet.png?size=50x50&set=set1",
+          "username": "Kate Hankey",
+          "date_joined": "4/26/2022",
+          "following": true,
+          "num_followers": 0,
+          "num_following": 0
+        },
+        "commented_at": "1/10/2022",
+        "comment_text": "Cambridge amico dit me que Occidental es.Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. L"
+      }
+    ]
   },
   {
     "id": "6355d49dfc13ae1ff9000003",
