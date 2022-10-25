@@ -4,16 +4,27 @@ import { useRouter } from "next/router";
 import { usePosts } from "../contexts/PostsContext";
 
 import styles from "../styles/components/PostsSection.module.scss";
+import { CommentComponent } from "./CommentComponent";
 
 export function PostsSection() {
   const router = useRouter();
   const { posts, isFilterSelected, searchInput } = usePosts();
 
   const postsData = searchInput
-    ? posts.filter((post) =>
-        post.post_text.toLowerCase().includes(searchInput.toLowerCase())
+    ? posts.filter(
+        (post) =>
+          post.post_text.toLowerCase().includes(searchInput.toLowerCase()) &&
+          !post.reposted_by
       )
     : [...posts];
+
+  const commentsData = searchInput
+    ? posts.flatMap((post) =>
+        post.comments.filter((comment) =>
+          comment.comment_text.toLowerCase().includes(searchInput.toLowerCase())
+        )
+      )
+    : [];
 
   function handleOnChange() {
     if (isFilterSelected) {
@@ -46,6 +57,10 @@ export function PostsSection() {
         }
         return <PostComponent post={post} key={idx} />;
       })}
+      {commentsData &&
+        commentsData.map((comment, idx) => (
+          <CommentComponent key={idx} comment={comment} />
+        ))}
     </main>
   );
 }
