@@ -35,6 +35,8 @@ type PostsContextData = {
   posts: Post[];
   setPosts: (posts: Post[]) => void;
   isFilterSelected: boolean;
+  searchInput: string;
+  setSearchInput: (searchInput: string) => void;
 };
 
 type PostsProviderProps = {
@@ -47,7 +49,10 @@ export function PostsProvider({ children }: PostsProviderProps) {
   const router = useRouter();
   const { page_id } = router.query;
   const [posts, setPosts] = useState<Post[]>([]);
+
   const [isFilterSelected, setIsFilterSelected] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+
   const { setUserTodayPosts } = useUser();
   const { user } = useUser();
 
@@ -119,6 +124,8 @@ export function PostsProvider({ children }: PostsProviderProps) {
         posts,
         setPosts,
         isFilterSelected,
+        searchInput,
+        setSearchInput,
       }}
     >
       {children}

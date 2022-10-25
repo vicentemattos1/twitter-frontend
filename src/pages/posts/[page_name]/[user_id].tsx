@@ -8,7 +8,6 @@ const Posts: NextPage = () => {
   const router = useRouter();
   const { page_name, user_id } = router.query;
   const [isOpen] = useState(true);
-  console.log(page_name);
   return (
     <>
       {!!page_name && page_name.includes("profile") && user_id && (

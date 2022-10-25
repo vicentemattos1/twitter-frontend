@@ -7,7 +7,11 @@ import styles from "../styles/components/PostsSection.module.scss";
 
 export function PostsSection() {
   const router = useRouter();
-  const { posts, isFilterSelected } = usePosts();
+  const { posts, isFilterSelected, searchInput } = usePosts();
+
+  const postsData = searchInput
+    ? posts.filter((post) => post.post_text.includes(searchInput))
+    : [...posts];
 
   function handleOnChange() {
     if (isFilterSelected) {
@@ -31,7 +35,7 @@ export function PostsSection() {
           <span className={`${styles["slider"]} ${styles["round"]}`}></span>
         </label>
       </div>
-      {posts.map((post, idx) => {
+      {postsData.map((post, idx) => {
         if (isFilterSelected) {
           if (post && post.user.following) {
             return <PostComponent post={post} key={idx} />;
