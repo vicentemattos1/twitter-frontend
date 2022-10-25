@@ -13,6 +13,7 @@ export function Header() {
           <input
             type="text"
             value={searchInput}
+            placeholder="Search..."
             onChange={(e) => setSearchInput(e.target.value)}
           />
         </div>
