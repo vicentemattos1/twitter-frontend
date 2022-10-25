@@ -25,7 +25,9 @@ export function CommentComponent({ comment }: CommentComponentProps) {
       )}
       <div>
         <div>
-          <button onClick={() => router.push(`/profile/${comment.user.id}`)}>
+          <button
+            onClick={() => router.push(`/posts/profile/${comment.user.id}`)}
+          >
             <strong>{comment.user.username}</strong>
           </button>
         </div>

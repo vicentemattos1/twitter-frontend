@@ -45,7 +45,7 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
   }
 
   useEffect(() => {
-    if (router.asPath === "/profile" && user) {
+    if (router.asPath === "/posts/profile" && user) {
       setUserData(user);
     } else {
       const data = posts.find((post) => post.user.id === user_id);

@@ -23,11 +23,11 @@ export function Sidebar() {
           </li>
           <li
             className={`${styles["nav_option"]} ${
-              router.pathname.includes("/profile") && styles["active"]
+              router.pathname.includes("/posts/profile") && styles["active"]
             }`}
           >
             <AiOutlineUser size={20} />
-            <Link href="/profile">
+            <Link href="/posts/profile">
               <a>Profile</a>
             </Link>
           </li>

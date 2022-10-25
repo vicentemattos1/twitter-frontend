@@ -46,7 +46,9 @@ export function PostComponent({ post }: PostComponentProps) {
         />
         <div>
           <div>
-            <button onClick={() => router.push(`/profile/${post.user.id}`)}>
+            <button
+              onClick={() => router.push(`/posts/profile/${post.user.id}`)}
+            >
               <strong>{post.user.username}</strong>
             </button>
             {post.reposted_by?.user?.username && (
