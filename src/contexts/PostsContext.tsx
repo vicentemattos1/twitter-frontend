@@ -48,7 +48,6 @@ const PostsContext = createContext({} as PostsContextData);
 export function PostsProvider({ children }: PostsProviderProps) {
   const router = useRouter();
   const { page_name } = router.query;
-  console.log(page_name);
   const [posts, setPosts] = useState<Post[]>([]);
 
   const [isFilterSelected, setIsFilterSelected] = useState(false);
@@ -100,7 +99,6 @@ export function PostsProvider({ children }: PostsProviderProps) {
           (date1, date2) =>
             +new Date(date2.posted_at) - +new Date(date1.posted_at)
         );
-        console.log(postsInit.map((post) => post.posted_at));
         localStorage.setItem("posts", JSON.stringify(postsInit));
         setPosts(postsInit);
         countTodayUserPosts(postsInit);
