@@ -21,6 +21,7 @@ export function PostsSection() {
     <main className={styles["container"]}>
       <NewPost />
       <div className={styles["filter"]}>
+        Only following
         <label className={styles["switch"]}>
           <input
             type="checkbox"
@@ -29,7 +30,6 @@ export function PostsSection() {
           />
           <span className={`${styles["slider"]} ${styles["round"]}`}></span>
         </label>
-        Only following
       </div>
       {posts.map((post, idx) => {
         if (isFilterSelected) {

@@ -2,8 +2,10 @@
   display: flex;
   flex: 1;
   align-items: flex-start;
-  padding: 1rem 0;
-  border-bottom: solid 2px var(--gray-line);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: solid 2px var(--gray-line);
+  border-radius: 20px;
   animation: fade-in 2s;
 
   button {
