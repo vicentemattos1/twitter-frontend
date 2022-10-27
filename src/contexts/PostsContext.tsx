@@ -15,13 +15,13 @@ export type Post = {
   user: User;
   post_text: string;
   posted_at: string;
-  reposted_by: Repost | null;
+  repost: Repost | null;
   comments: Comment[];
 };
 
 type Repost = {
   user: User;
-  reposted_at: string;
+  post_id: string;
 };
 
 export type Comment = {
@@ -61,11 +61,7 @@ export function PostsProvider({ children }: PostsProviderProps) {
       const count = posts.reduce((amount, post) => {
         let interactionCount = 0;
         // Checking only original posts
-        if (post.user.id === user.id && !post.reposted_by) {
-          interactionCount++;
-        }
-        // Counting reposts from user
-        if (post.reposted_by?.user.id === user.id) {
+        if (post.user.id === user.id) {
           interactionCount++;
         }
         // Count comments from user
@@ -84,7 +80,6 @@ export function PostsProvider({ children }: PostsProviderProps) {
   useEffect(() => {
     if (!!(posts.length > 0)) {
       localStorage.setItem("posts", JSON.stringify(posts));
-      console.log(posts);
       countTodayUserPosts(posts);
     } else {
       const postsLocalStorage = localStorage.getItem("posts") || "";

@@ -10,7 +10,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { currentDateFormater } from "../utils/currentDateFormater";
 import { NewPost } from "./NewPost";
 import Link from "next/link";
-import { CommentComponent } from "./CommentComponent";
+import { PostModel } from "./PostModel";
 
 type ProfileModalProps = {
   isOpen: boolean;
@@ -85,7 +85,8 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
         </a>
       </Link>
       <main className={styles["container"]}>
-        {posts.find((post) => post.user.id === userData.id) ? (
+        {posts.find((post) => post.user.id === userData.id) ||
+        userData.id === user?.id ? (
           <>
             <div className={styles["profile-info"]}>
               {userData && userData.avatar_url && (
@@ -122,11 +123,7 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
                     {posts.reduce((amount, post) => {
                       let interactionCount = 0;
                       // Checking only original posts
-                      if (post.user.id === userData.id && !post.reposted_by) {
-                        interactionCount++;
-                      }
-                      // Counting reposts from user
-                      if (post.reposted_by?.user.id === userData.id) {
+                      if (post.user.id === userData.id) {
                         interactionCount++;
                       }
                       // Count comments from user
@@ -156,14 +153,20 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
             {posts.map((post, index) => {
               if (
                 post.user.id === userData.id ||
-                post.reposted_by?.user.id === userData.id
+                post.repost?.user.id === userData.id
               ) {
                 return <PostComponent key={index} post={post} />;
               }
               return;
             })}
             {comments.map((comment, index) => (
-              <CommentComponent key={index} comment={comment} />
+              <PostModel
+                key={index}
+                avatar_url={comment.user.avatar_url}
+                text={comment.comment_text}
+                user_id={comment.user.id}
+                username={comment.user.username}
+              />
             ))}
           </>
         ) : (

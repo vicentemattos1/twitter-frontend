@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 20px;
+  border: solid 2px var(--gray-line);
+  animation: fade-in 2s;
+
+  .post-text {
+    word-wrap: break-word;
+    display: inline-block;
+    max-width: 60vw;
+    margin-bottom: 0.5rem;
+  }
+  .post-header {
+    display: flex;
+    align-items: center;
+
+    .reply {
+      :first-child {
+        margin-right: 0.2rem;
+      }
+      display: flex;
+      align-items: center;
+      margin-left: 0.5rem;
+      font-size: 0.7rem;
+      color: var(--blue);
+    }
+  }
+
+  button {
+    border: none;
+    font-weight: bold;
+    text-align: start;
+    width: 100%;
+    max-width: 150px;
+  }
+
+  img {
+    border-radius: 50%;
+  }
+  > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0.5rem;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -29,7 +29,7 @@ export function NewPost() {
           num_following: user.num_following,
         },
         posted_at: currentDateFormater(),
-        reposted_by: null,
+        repost: null,
         post_text: newPostTextArea,
         comments: [],
       };

@@ -4,19 +4,26 @@ import { useRouter } from "next/router";
 import { Post, usePosts } from "../contexts/PostsContext";
 
 import styles from "../styles/components/PostsSection.module.scss";
-import { CommentComponent } from "./CommentComponent";
+import { PostModel } from "./PostModel";
+import Link from "next/link";
 
 export function PostsSection() {
   const router = useRouter();
+  const { page_name } = router.query;
   const { posts, isFilterSelected, searchInput } = usePosts();
 
+  var allPosts: Post[] = [...posts];
+  const unique_post = posts.find((post) => post.id === page_name);
+  if (unique_post) {
+    allPosts = [unique_post];
+  }
+
   const postsData = searchInput
-    ? posts.filter(
-        (post) =>
-          post.post_text.toLowerCase().includes(searchInput.toLowerCase()) &&
-          !post.reposted_by
+    ? posts.filter((post) =>
+        post.post_text.toLowerCase().includes(searchInput.toLowerCase())
       )
-    : [...posts];
+    : allPosts;
+
   const commentsData = searchInput
     ? posts.flatMap((post) =>
         post.comments.filter((comment) =>
@@ -25,28 +32,19 @@ export function PostsSection() {
       )
     : [];
 
-  function handleOnChange() {
-    if (isFilterSelected) {
-      router.push("/posts/all");
-    } else {
-      router.push("/posts/following");
-    }
-  }
-
   return (
     <main className={styles["container"]}>
       <NewPost />
-      <div className={styles["filter"]}>
-        Only following
-        <label className={styles["switch"]}>
-          <input
-            type="checkbox"
-            checked={isFilterSelected}
-            onChange={() => handleOnChange()}
-          />
-          <span className={`${styles["slider"]} ${styles["round"]}`}></span>
-        </label>
-      </div>
+      <Link href={isFilterSelected ? "/posts/all" : "/posts/following"}>
+        <a className={styles["filter"]}>
+          {isFilterSelected ? "Only following" : "All posts"}
+          <label className={styles["switch"]}>
+            <input type="checkbox" defaultChecked={isFilterSelected} />
+            <span className={`${styles["slider"]} ${styles["round"]}`}></span>
+          </label>
+        </a>
+      </Link>
+
       {!!postsData ? (
         postsData.map((post, idx) => {
           if (isFilterSelected) {
@@ -65,7 +63,13 @@ export function PostsSection() {
 
       {commentsData &&
         commentsData.map((comment, idx) => (
-          <CommentComponent key={idx} comment={comment} />
+          <PostModel
+            key={idx}
+            avatar_url={comment.user.avatar_url}
+            text={comment.comment_text}
+            user_id={comment.user.id}
+            username={comment.user.username}
+          />
         ))}
     </main>
   );
