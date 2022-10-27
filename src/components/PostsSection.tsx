@@ -1,7 +1,7 @@
 import { PostComponent } from "./PostComponent";
 import { NewPost } from "./NewPost";
 import { useRouter } from "next/router";
-import { usePosts } from "../contexts/PostsContext";
+import { Post, usePosts } from "../contexts/PostsContext";
 
 import styles from "../styles/components/PostsSection.module.scss";
 import { CommentComponent } from "./CommentComponent";
@@ -17,7 +17,6 @@ export function PostsSection() {
           !post.reposted_by
       )
     : [...posts];
-
   const commentsData = searchInput
     ? posts.flatMap((post) =>
         post.comments.filter((comment) =>
@@ -48,15 +47,22 @@ export function PostsSection() {
           <span className={`${styles["slider"]} ${styles["round"]}`}></span>
         </label>
       </div>
-      {postsData.map((post, idx) => {
-        if (isFilterSelected) {
-          if (post && post.user.following) {
-            return <PostComponent post={post} key={idx} />;
+      {!!postsData ? (
+        postsData.map((post, idx) => {
+          if (isFilterSelected) {
+            if (post && post.user.following) {
+              return <PostComponent post={post} key={idx} />;
+            }
+            return null;
           }
-          return null;
-        }
-        return <PostComponent post={post} key={idx} />;
-      })}
+          return <PostComponent post={post} key={idx} />;
+        })
+      ) : (
+        <div className={styles["no-posts-found"]}>
+          <span>No posts found</span>
+        </div>
+      )}
+
       {commentsData &&
         commentsData.map((comment, idx) => (
           <CommentComponent key={idx} comment={comment} />

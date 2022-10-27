@@ -7,6 +7,12 @@
   display: flex;
   flex-direction: column;
 
+  .no-posts-found {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+  }
+
   img {
     z-index: -1;
   }
