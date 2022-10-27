@@ -1,25 +1,25 @@
-import { useState } from "react";
-import { BiRepost } from "react-icons/bi";
-import { FaRegCommentDots } from "react-icons/fa";
+import { useState } from "react"
+import { BiRepost } from "react-icons/bi"
+import { FaRegCommentDots } from "react-icons/fa"
 
-import { Post, usePosts } from "../contexts/PostsContext";
-import { useUser } from "../contexts/UserContext";
-import { CommentSection } from "./CommentSection";
+import { Post, usePosts } from "../contexts/PostsContext"
+import { useUser } from "../contexts/UserContext"
+import { CommentSection } from "./CommentSection"
 
-import styles from "../styles/components/PostComponent.module.scss";
-import { currentDateFormater } from "../utils/currentDateFormater";
-import { PostModel } from "./PostModel";
-import { uuid } from "uuidv4";
-import Link from "next/link";
+import styles from "../styles/components/PostComponent.module.scss"
+import { currentDateFormater } from "../utils/currentDateFormater"
+import { PostModel } from "./PostModel"
+import { uuid } from "uuidv4"
+import Link from "next/link"
 
 type PostComponentProps = {
-  post: Post;
-};
+  post: Post
+}
 
 export function PostComponent({ post }: PostComponentProps) {
-  const { user, userCanPost } = useUser();
-  const { posts, setPosts } = usePosts();
-  const [showComments, setShowComments] = useState(false);
+  const { user, userCanPost } = useUser()
+  const { posts, setPosts } = usePosts()
+  const [showComments, setShowComments] = useState(false)
 
   function handleRepost(post: Post) {
     if (user && userCanPost()) {
@@ -33,17 +33,15 @@ export function PostComponent({ post }: PostComponentProps) {
           comments: [],
         },
         ...posts,
-      ];
+      ]
 
-      setPosts(postsUpdated);
+      setPosts(postsUpdated)
     }
   }
 
   if (post && post.user) {
     if (post.repost) {
-      const postReposted = posts.find(
-        (postData) => postData.id === post.repost?.post_id
-      );
+      const postReposted = posts.find((postData) => postData.id === post.repost?.post_id)
       if (!!postReposted && post.post_text) {
         return (
           <PostModel
@@ -72,12 +70,10 @@ export function PostComponent({ post }: PostComponentProps) {
                   <FaRegCommentDots size={20} />
                 </button>
               </div>
-              {showComments && (
-                <CommentSection comments={post.comments} post_id={post.id} />
-              )}
+              {showComments && <CommentSection comments={post.comments} post_id={post.id} />}
             </div>
           </PostModel>
-        );
+        )
       } else if (!!postReposted) {
         return (
           <PostModel
@@ -97,15 +93,10 @@ export function PostComponent({ post }: PostComponentProps) {
                   <FaRegCommentDots size={20} />
                 </button>
               </div>
-              {showComments && (
-                <CommentSection
-                  comments={postReposted.comments}
-                  post_id={postReposted.id}
-                />
-              )}
+              {showComments && <CommentSection comments={postReposted.comments} post_id={postReposted.id} />}
             </div>
           </PostModel>
-        );
+        )
       }
     }
     return (
@@ -125,12 +116,10 @@ export function PostComponent({ post }: PostComponentProps) {
               <FaRegCommentDots size={20} />
             </button>
           </div>
-          {showComments && (
-            <CommentSection comments={post.comments} post_id={post.id} />
-          )}
+          {showComments && <CommentSection comments={post.comments} post_id={post.id} />}
         </div>
       </PostModel>
-    );
+    )
   }
-  return <></>;
+  return <></>
 }

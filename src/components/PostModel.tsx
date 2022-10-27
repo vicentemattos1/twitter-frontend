@@ -1,28 +1,21 @@
-import { ReactNode } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import DefaultImage from "../public/image-default.svg";
+import { ReactNode } from "react"
+import Image from "next/image"
+import Link from "next/link"
+import DefaultImage from "../public/image-default.svg"
 
-import styles from "../styles/components/PostModel.module.scss";
-import { BiRepost } from "react-icons/bi";
+import styles from "../styles/components/PostModel.module.scss"
+import { BiRepost } from "react-icons/bi"
 
 type PostModelProps = {
-  user_id: string;
-  avatar_url: string;
-  username: string;
-  text: string;
-  reposted_by?: string;
-  children?: ReactNode;
-};
+  user_id: string
+  avatar_url: string
+  username: string
+  text: string
+  reposted_by?: string
+  children?: ReactNode
+}
 
-export function PostModel({
-  user_id,
-  avatar_url,
-  text,
-  username,
-  reposted_by,
-  children,
-}: PostModelProps) {
+export function PostModel({ user_id, avatar_url, text, username, reposted_by, children }: PostModelProps) {
   return (
     <div className={styles["container"]}>
       <Image
@@ -36,9 +29,7 @@ export function PostModel({
       <div>
         <header className={styles["post-header"]}>
           <Link href={`/posts/profile/${user_id}`}>
-            <a>
-              <strong>{username}</strong>
-            </a>
+            <strong>{username}</strong>
           </Link>
           {reposted_by && (
             <span className={styles["reply"]}>
@@ -51,5 +42,5 @@ export function PostModel({
         {children}
       </div>
     </div>
-  );
+  )
 }

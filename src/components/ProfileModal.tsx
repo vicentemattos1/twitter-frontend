@@ -1,66 +1,60 @@
-import Image from "next/image";
-import { useRouter } from "next/router";
-import Modal from "react-modal";
-import { User, useUser } from "../contexts/UserContext";
-import { PostComponent } from "./PostComponent";
-import styles from "../styles/components/ProfileModal.module.scss";
-import { Post, usePosts } from "../contexts/PostsContext";
-import { useState, useEffect } from "react";
-import { AiOutlineCloseCircle } from "react-icons/ai";
-import { currentDateFormater } from "../utils/currentDateFormater";
-import { NewPost } from "./NewPost";
-import Link from "next/link";
-import { PostModel } from "./PostModel";
+import Image from "next/image"
+import { useRouter } from "next/router"
+import Modal from "react-modal"
+import { User, useUser } from "../contexts/UserContext"
+import { PostComponent } from "./PostComponent"
+import styles from "../styles/components/ProfileModal.module.scss"
+import { Post, usePosts } from "../contexts/PostsContext"
+import { useState, useEffect } from "react"
+import { AiOutlineCloseCircle } from "react-icons/ai"
+import { currentDateFormater } from "../utils/currentDateFormater"
+import { NewPost } from "./NewPost"
+import Link from "next/link"
+import { PostModel } from "./PostModel"
 
 type ProfileModalProps = {
-  isOpen: boolean;
-  user_id?: string;
-};
+  isOpen: boolean
+  user_id?: string
+}
 
 export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
-  const router = useRouter();
-  const { user, setUser } = useUser();
-  const { posts, setPosts } = usePosts();
-  const [userData, setUserData] = useState<User>({} as User);
+  const router = useRouter()
+  const { user, setUser } = useUser()
+  const { posts, setPosts } = usePosts()
+  const [userData, setUserData] = useState<User>({} as User)
 
-  const comments = posts.flatMap((post) =>
-    post.comments.filter((comment) => comment.user.id === userData.id)
-  );
+  const comments = posts.flatMap((post) => post.comments.filter((comment) => comment.user.id === userData.id))
 
   function handleUnfollow(id: string) {
     const updatedPosts: Post[] = posts.map((post) =>
-      post.user.id === id
-        ? { ...post, user: { ...post.user, following: false } }
-        : post
-    );
+      post.user.id === id ? { ...post, user: { ...post.user, following: false } } : post,
+    )
     if (updatedPosts && user) {
-      setPosts([...updatedPosts]);
-      setUser({ ...user, num_following: user.num_following - 1 });
+      setPosts([...updatedPosts])
+      setUser({ ...user, num_following: user.num_following - 1 })
     }
   }
 
   function handleFollow(id: string) {
     const updatedPosts: Post[] = posts.map((post) =>
-      post.user.id === id
-        ? { ...post, user: { ...post.user, following: true } }
-        : post
-    );
+      post.user.id === id ? { ...post, user: { ...post.user, following: true } } : post,
+    )
     if (updatedPosts && user) {
-      setPosts([...updatedPosts]);
-      setUser({ ...user, num_following: user.num_following + 1 });
+      setPosts([...updatedPosts])
+      setUser({ ...user, num_following: user.num_following + 1 })
     }
   }
 
   useEffect(() => {
     if (router.asPath === "/posts/profile" && user) {
-      setUserData(user);
+      setUserData(user)
     } else {
-      const data = posts.find((post) => post.user.id === user_id);
+      const data = posts.find((post) => post.user.id === user_id)
       if (data) {
-        setUserData(data.user);
+        setUserData(data.user)
       }
     }
-  }, [router.asPath, user, posts, user_id]);
+  }, [router.asPath, user, posts, user_id])
   return (
     <Modal
       style={{
@@ -79,14 +73,11 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
       isOpen={isOpen}
       onRequestClose={() => router.back()}
     >
-      <Link href="/posts">
-        <a className={styles["close-btn"]}>
-          <AiOutlineCloseCircle size={28} />
-        </a>
+      <Link href="/posts" className={styles["close-btn"]}>
+        <AiOutlineCloseCircle size={28} />
       </Link>
       <main className={styles["container"]}>
-        {posts.find((post) => post.user.id === userData.id) ||
-        userData.id === user?.id ? (
+        {posts.find((post) => post.user.id === userData.id) || userData.id === user?.id ? (
           <>
             <div className={styles["profile-info"]}>
               {userData && userData.avatar_url && (
@@ -104,16 +95,11 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
                   <strong>{userData.username?.slice(0, 14)}</strong>
                   {userData.id !== user?.id ? (
                     userData.following ? (
-                      <button
-                        className={styles["following"]}
-                        onClick={() => handleUnfollow(userData.id)}
-                      >
+                      <button className={styles["following"]} onClick={() => handleUnfollow(userData.id)}>
                         <span>Following</span>
                       </button>
                     ) : (
-                      <button onClick={() => handleFollow(userData.id)}>
-                        + Follow
-                      </button>
+                      <button onClick={() => handleFollow(userData.id)}>+ Follow</button>
                     )
                   ) : null}
                 </div>
@@ -121,43 +107,33 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
                   <span>
                     Number of posts:{" "}
                     {posts.reduce((amount, post) => {
-                      let interactionCount = 0;
+                      let interactionCount = 0
                       // Checking only original posts
                       if (post.user.id === userData.id) {
-                        interactionCount++;
+                        interactionCount++
                       }
                       // Count comments from user
                       if (!!post.comments) {
                         interactionCount =
-                          interactionCount +
-                          post.comments.filter(
-                            (comment) => comment.user.id === userData.id
-                          ).length;
+                          interactionCount + post.comments.filter((comment) => comment.user.id === userData.id).length
                       }
-                      return amount + interactionCount;
+                      return amount + interactionCount
                     }, 0)}
                   </span>
                   <span>Following: {userData.num_following}</span>
                   <span>Followers: {userData.num_followers}</span>
                 </div>
-                <span>
-                  Joined at: {currentDateFormater(userData.date_joined)}
-                </span>
+                <span>Joined at: {currentDateFormater(userData.date_joined)}</span>
               </div>
             </div>
 
-            {(!router.query.user_id || router.query.user_id === user?.id) && (
-              <NewPost />
-            )}
+            {(!router.query.user_id || router.query.user_id === user?.id) && <NewPost />}
 
             {posts.map((post, index) => {
-              if (
-                post.user.id === userData.id ||
-                post.repost?.user.id === userData.id
-              ) {
-                return <PostComponent key={index} post={post} />;
+              if (post.user.id === userData.id || post.repost?.user.id === userData.id) {
+                return <PostComponent key={index} post={post} />
               }
-              return;
+              return
             })}
             {comments.map((comment, index) => (
               <PostModel
@@ -177,5 +153,5 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
         )}
       </main>
     </Modal>
-  );
+  )
 }
