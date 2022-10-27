@@ -56,7 +56,7 @@ export function PostComponent({ post }: PostComponentProps) {
               <span> Reposted by: {post.reposted_by?.user.username}</span>
             )}
           </div>
-          <span>{post.post_text}</span>
+          <span className={styles["post-text"]}>{post.post_text}</span>
           <div className={styles["options"]}>
             <button onClick={() => handleRepost(post)}>
               <BiRepost size={20} />

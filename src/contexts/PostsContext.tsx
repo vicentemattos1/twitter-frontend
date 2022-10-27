@@ -84,6 +84,7 @@ export function PostsProvider({ children }: PostsProviderProps) {
   useEffect(() => {
     if (!!(posts.length > 0)) {
       localStorage.setItem("posts", JSON.stringify(posts));
+      console.log(posts);
       countTodayUserPosts(posts);
     } else {
       const postsLocalStorage = localStorage.getItem("posts") || "";

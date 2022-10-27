@@ -7,6 +7,13 @@
   border: solid 2px var(--gray-line);
   border-radius: 20px;
   animation: fade-in 2s;
+  max-width: 70vw;
+
+  .post-text {
+    word-wrap: break-word;
+    display: inline-block;
+    max-width: 60vw;
+  }
 
   button {
     border: none;
