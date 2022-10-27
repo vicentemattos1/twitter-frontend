@@ -85,82 +85,93 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
         </a>
       </Link>
       <main className={styles["container"]}>
-        <div className={styles["profile-info"]}>
-          {userData && userData.avatar_url && (
-            <Image
-              src={userData.avatar_url}
-              unoptimized
-              width={100}
-              height={100}
-              className={styles["image"]}
-              alt="Vicente Mattos"
-            />
-          )}
-          <div>
-            <div className={styles["profile-btn"]}>
-              <strong>{userData.username?.slice(0, 14)}</strong>
-              {userData.id !== user?.id ? (
-                userData.following ? (
-                  <button
-                    className={styles["following"]}
-                    onClick={() => handleUnfollow(userData.id)}
-                  >
-                    <span>Following</span>
-                  </button>
-                ) : (
-                  <button onClick={() => handleFollow(userData.id)}>
-                    + Follow
-                  </button>
-                )
-              ) : null}
+        {posts.find((post) => post.user.id === userData.id) ? (
+          <>
+            <div className={styles["profile-info"]}>
+              {userData && userData.avatar_url && (
+                <Image
+                  src={userData.avatar_url}
+                  unoptimized
+                  width={100}
+                  height={100}
+                  className={styles["image"]}
+                  alt="Vicente Mattos"
+                />
+              )}
+              <div>
+                <div className={styles["profile-btn"]}>
+                  <strong>{userData.username?.slice(0, 14)}</strong>
+                  {userData.id !== user?.id ? (
+                    userData.following ? (
+                      <button
+                        className={styles["following"]}
+                        onClick={() => handleUnfollow(userData.id)}
+                      >
+                        <span>Following</span>
+                      </button>
+                    ) : (
+                      <button onClick={() => handleFollow(userData.id)}>
+                        + Follow
+                      </button>
+                    )
+                  ) : null}
+                </div>
+                <div>
+                  <span>
+                    Number of posts:{" "}
+                    {posts.reduce((amount, post) => {
+                      let interactionCount = 0;
+                      // Checking only original posts
+                      if (post.user.id === userData.id && !post.reposted_by) {
+                        interactionCount++;
+                      }
+                      // Counting reposts from user
+                      if (post.reposted_by?.user.id === userData.id) {
+                        interactionCount++;
+                      }
+                      // Count comments from user
+                      if (!!post.comments) {
+                        interactionCount =
+                          interactionCount +
+                          post.comments.filter(
+                            (comment) => comment.user.id === userData.id
+                          ).length;
+                      }
+                      return amount + interactionCount;
+                    }, 0)}
+                  </span>
+                  <span>Following: {userData.num_following}</span>
+                  <span>Followers: {userData.num_followers}</span>
+                </div>
+                <span>
+                  Joined at: {currentDateFormater(userData.date_joined)}
+                </span>
+              </div>
             </div>
-            <div>
-              <span>
-                Number of posts:{" "}
-                {posts.reduce((amount, post) => {
-                  let interactionCount = 0;
-                  // Checking only original posts
-                  if (post.user.id === userData.id && !post.reposted_by) {
-                    interactionCount++;
-                  }
-                  // Counting reposts from user
-                  if (post.reposted_by?.user.id === userData.id) {
-                    interactionCount++;
-                  }
-                  // Count comments from user
-                  if (!!post.comments) {
-                    interactionCount =
-                      interactionCount +
-                      post.comments.filter(
-                        (comment) => comment.user.id === userData.id
-                      ).length;
-                  }
-                  return amount + interactionCount;
-                }, 0)}
-              </span>
-              <span>Following: {userData.num_following}</span>
-              <span>Followers: {userData.num_followers}</span>
-            </div>
-            <span>Joined at: {currentDateFormater(userData.date_joined)}</span>
-          </div>
-        </div>
 
-        {(!router.query.user_id || router.query.user_id === user?.id) && (
-          <NewPost />
+            {(!router.query.user_id || router.query.user_id === user?.id) && (
+              <NewPost />
+            )}
+
+            {posts.map((post, index) => {
+              if (
+                post.user.id === userData.id ||
+                post.reposted_by?.user.id === userData.id
+              ) {
+                return <PostComponent key={index} post={post} />;
+              }
+              return;
+            })}
+            {comments.map((comment, index) => (
+              <CommentComponent key={index} comment={comment} />
+            ))}
+          </>
+        ) : (
+          <strong className={styles["user-not-found"]}>
+            <AiOutlineCloseCircle size={100} />
+            User does not exist
+          </strong>
         )}
-
-        {posts.map((post, index) => {
-          if (
-            post.user.id === userData.id ||
-            post.reposted_by?.user.id === userData.id
-          ) {
-            return <PostComponent key={index} post={post} />;
-          }
-          return;
-        })}
-        {comments.map((comment, index) => (
-          <CommentComponent key={index} comment={comment} />
-        ))}
       </main>
     </Modal>
   );

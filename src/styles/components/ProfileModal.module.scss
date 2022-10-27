@@ -2,13 +2,24 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   position: relative;
-  align-items: stretch;
-  margin-top: 2rem;
+  padding-top: 2rem;
+
+  .user-not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 2rem);
+    font-size: 2rem;
+
+    svg {
+      color: var(--red);
+    }
+  }
 
   textarea {
-    background: none;
+    background: none !important;
   }
 
   > * {
@@ -18,6 +29,7 @@
   .profile-info {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-bottom: 2rem;
 
     > div {
