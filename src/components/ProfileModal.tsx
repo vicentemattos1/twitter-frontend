@@ -10,6 +10,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { currentDateFormater } from "../utils/currentDateFormater";
 import { NewPost } from "./NewPost";
 import Link from "next/link";
+import { CommentComponent } from "./CommentComponent";
 
 type ProfileModalProps = {
   isOpen: boolean;
@@ -21,6 +22,11 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
   const { user, setUser } = useUser();
   const { posts, setPosts } = usePosts();
   const [userData, setUserData] = useState<User>({} as User);
+
+  const comments = posts.flatMap((post) =>
+    post.comments.filter((comment) => comment.user.id === userData.id)
+  );
+
   function handleUnfollow(id: string) {
     const updatedPosts: Post[] = posts.map((post) =>
       post.user.id === id
@@ -139,14 +145,22 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
           </div>
         </div>
 
-        {!router.query.user_id && <NewPost />}
+        {(!router.query.user_id || router.query.user_id === userData.id) && (
+          <NewPost />
+        )}
 
         {posts.map((post, index) => {
-          if (post.user.id === userData.id) {
+          if (
+            post.user.id === userData.id ||
+            post.reposted_by?.user.id === userData.id
+          ) {
             return <PostComponent key={index} post={post} />;
           }
           return;
         })}
+        {comments.map((comment, index) => (
+          <CommentComponent key={index} comment={comment} />
+        ))}
       </main>
     </Modal>
   );
