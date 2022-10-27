@@ -61,7 +61,6 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
       }
     }
   }, [router.asPath, user, posts, user_id]);
-
   return (
     <Modal
       style={{
@@ -146,7 +145,7 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
           </div>
         </div>
 
-        {(!router.query.user_id || router.query.user_id === userData.id) && (
+        {(!router.query.user_id || router.query.user_id === user?.id) && (
           <NewPost />
         )}
 
