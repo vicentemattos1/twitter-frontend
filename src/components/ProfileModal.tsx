@@ -119,23 +119,24 @@ export function ProfileModal({ isOpen, user_id }: ProfileModalProps) {
               <span>
                 Number of posts:{" "}
                 {posts.reduce((amount, post) => {
-                  if (post.user.id === userData.id) {
-                    return amount + 1;
-                  } else if (
-                    post.reposted_by &&
-                    post.reposted_by.user &&
-                    post.reposted_by.user.id === userData.id
-                  ) {
-                    return amount + 1;
-                  } else if (post.comments.length > 0) {
-                    return (
-                      amount +
+                  let interactionCount = 0;
+                  // Checking only original posts
+                  if (post.user.id === userData.id && !post.reposted_by) {
+                    interactionCount++;
+                  }
+                  // Counting reposts from user
+                  if (post.reposted_by?.user.id === userData.id) {
+                    interactionCount++;
+                  }
+                  // Count comments from user
+                  if (!!post.comments) {
+                    interactionCount =
+                      interactionCount +
                       post.comments.filter(
                         (comment) => comment.user.id === userData.id
-                      ).length
-                    );
+                      ).length;
                   }
-                  return amount;
+                  return amount + interactionCount;
                 }, 0)}
               </span>
               <span>Following: {userData.num_following}</span>

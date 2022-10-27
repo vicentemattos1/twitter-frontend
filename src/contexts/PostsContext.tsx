@@ -57,34 +57,28 @@ export function PostsProvider({ children }: PostsProviderProps) {
   const { user } = useUser();
 
   function countTodayUserPosts(posts: Post[]) {
-    const count = posts.reduce((amount, post) => {
-      if (user) {
-        if (
-          post.user.id === user.id &&
-          post.posted_at === currentDateFormater()
-        ) {
-          return amount + 1;
-        } else if (
-          post.reposted_by &&
-          post.reposted_by.user &&
-          post.reposted_by.user.id === user.id &&
-          post.reposted_by.reposted_at === currentDateFormater()
-        ) {
-          return amount + 1;
-        } else if (post.comments.length > 0) {
-          return (
-            amount +
-            post.comments.filter(
-              (comment) =>
-                comment.user.id === user.id &&
-                comment.commented_at === currentDateFormater()
-            ).length
-          );
+    if (user) {
+      const count = posts.reduce((amount, post) => {
+        let interactionCount = 0;
+        // Checking only original posts
+        if (post.user.id === user.id && !post.reposted_by) {
+          interactionCount++;
         }
-      }
-      return amount;
-    }, 0);
-    setUserTodayPosts(count);
+        // Counting reposts from user
+        if (post.reposted_by?.user.id === user.id) {
+          interactionCount++;
+        }
+        // Count comments from user
+        if (!!post.comments) {
+          interactionCount =
+            interactionCount +
+            post.comments.filter((comment) => comment.user.id === user.id)
+              .length;
+        }
+        return amount + interactionCount;
+      }, 0);
+      setUserTodayPosts(count);
+    }
   }
 
   useEffect(() => {
