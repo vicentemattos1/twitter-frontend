@@ -35,3 +35,15 @@ yarn dev
 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+![image](https://github.com/vicentemattos1/twitter-frontend/assets/48080194/52d8ec94-0b8f-441a-a8fb-19349e3c2d49)
+
+![image](https://github.com/vicentemattos1/twitter-frontend/assets/48080194/5704e611-5800-4453-bf19-a9dd8e560ba1)
+
+![image](https://github.com/vicentemattos1/twitter-frontend/assets/48080194/bfbbb7f0-798a-407b-8983-f3e0a79da159)
+
+![image](https://github.com/vicentemattos1/twitter-frontend/assets/48080194/7bdf12e8-2c4c-4955-9b20-d5a6c448516b)
+
+
+![image](https://github.com/vicentemattos1/twitter-frontend/assets/48080194/e5c2963a-9b41-4622-a14b-a1dc623cd0bf)
+
